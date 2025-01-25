@@ -14,9 +14,12 @@ import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar"; /
 const Header = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
+
+  console.log(isProfileMenuOpen)
+
   const handleLogout = () => {
     // Add your logout functionality here
-    //@ts-expect-error
+    //@ts-expect-error  'yo'
     alert("Logging out...");
     setIsProfileMenuOpen(false);
   };
