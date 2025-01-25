@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏥 Front Desk System for Clinic Management
 
-## Getting Started
+## Overview
 
-First, run the development server:
+The **Front Desk System** is a comprehensive web-based application designed to streamline patient queue management and doctor appointments in a clinical setting. Built with modern web technologies, this system empowers front desk staff to efficiently handle patient flows, track appointments, and manage clinic operations.
 
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16 or later)
+- npm/yarn
+- MySQL Database
+
+### Frontend Setup (Next.js)
+
+1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/front-desk-system.git
+cd front-desk-system
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Start development server
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+### Backend Setup (NestJS)
 
-To learn more about Next.js, take a look at the following resources:
+1. Navigate to backend directory
+```bash
+cd backend
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies
+```bash
+npm install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Configure environment variables
+Create a `.env` file with the following:
+```bash
+DATABASE_HOST=localhost
+DATABASE_PORT=3306
+DATABASE_USERNAME=root
+DATABASE_PASSWORD=yourpassword
+DATABASE_NAME=clinic_db
+JWT_SECRET=your-secret-key
+```
 
-## Deploy on Vercel
+4. Start the backend server
+```bash
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ✨ Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🔐 Authentication
+- Secure login for front desk staff
+- JWT-based authentication and authorization
+
+### 📋 Queue Management
+- Add walk-in patients to queue
+- Assign and track queue numbers
+- Update patient statuses (Waiting, With Doctor, Completed)
+
+### 📅 Appointment Management
+- Book, reschedule, and cancel appointments
+- View doctor availability
+- Track appointment statuses
+
+### 👩‍⚕️ Doctor Management
+- Manage doctor profiles
+- Search doctors by specialization
+- Track doctor availability
+
+## 🛠 Technology Stack
+
+### Backend
+- NestJS
+- TypeORM
+- MySQL
+- JWT Authentication
+- Axios
+
+### Frontend
+- Next.js
+- React
+- Tailwind CSS
+- Axios
+
+## 🌐 Deployment
+
+### Backend
+Recommended platforms:
+- Heroku
+- DigitalOcean
+- AWS Elastic Beanstalk
+
+## 📚 Documentation
+
+- [Next.js Docs](https://nextjs.org/docs)
+- [NestJS Docs](https://docs.nestjs.com/)
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 🐛 Issues
+
+Please report bugs or feature requests using GitHub Issues.
