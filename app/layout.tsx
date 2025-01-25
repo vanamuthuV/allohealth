@@ -1,19 +1,23 @@
-import './globals.css'
+'use client'
 
-export const metadata = {
-  title: "Allo Desk",
-  description: "Healthcare Management System",
-};
+import "./globals.css";
+import Header from "../components/Header";
+import { usePathname } from "next/navigation";
+
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   return (
     <html lang="en">
       <body>
-          {children}
+        {/* Conditionally render Header only on '/dashboard' route */}
+        {pathname === "/dashboard" && <Header />}
+        {children}
       </body>
     </html>
   );

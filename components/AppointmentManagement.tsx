@@ -272,7 +272,7 @@ console.log(patientName, setPatientName)
                 </td>
               </tr>
             ) : (
-              sortedAppointments.map((appointment) => (
+              appointments.map((appointment) => (
                 <tr key={appointment.id}>
                   <td className="border px-4 py-2">
                     {appointment.patientName}
