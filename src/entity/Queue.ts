@@ -1,6 +1,5 @@
 // src/entity/Queue.ts
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Patient } from "./Patient";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class Queue {
@@ -8,14 +7,14 @@ export class Queue {
   id: number;
 
   @Column()
-  queueNumber: number;
+  queueNumber: number; // Queue number for the patient
 
   @Column({ default: "waiting" })
-  status: "waiting" | "with doctor" | "completed";
+  status: "waiting" | "with doctor" | "completed"; // Status of the patient in the queue
 
-  @ManyToOne(() => Patient, (patient) => patient.queueEntries)
-  patient: Patient;
+  @Column()
+  patientName: string; // Patient's Name (instead of patient relation)
 
   @Column({ default: false })
-  isPriority: boolean; // For urgent cases
+  isPriority: boolean; // Flag to mark urgent cases
 }

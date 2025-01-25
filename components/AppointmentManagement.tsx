@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../components/ui/dialog";
+import { useToast } from "../hooks/use-toast";
 
 const AppointmentManagement = () => {
   const [appointments, setAppointments] = useState([
@@ -52,13 +53,13 @@ const AppointmentManagement = () => {
     },
   ]);
 
-  console.log(setDoctors)
+  console.log(setDoctors);
 
   const [patients, setPatients] = useState([
     { id: 1, name: "John Doe" },
     { id: 2, name: "Jane Doe" },
   ]);
-console.log(setPatients)
+  console.log(setPatients);
   const [isOpen, setIsOpen] = useState(false);
   const [doctorName, setDoctorName] = useState("");
   const [patientName, setPatientName] = useState("");
@@ -73,6 +74,8 @@ console.log(setPatients)
     "Marthahalli",
     "Indira Nagar",
   ];
+
+  const { toast } = useToast();
 
   const sortedAppointments = appointments.filter((appointment) => {
     const today = new Date();
@@ -100,16 +103,22 @@ console.log(setPatients)
       { id: prevAppointments.length + 1, ...newAppointment },
     ]);
     closeModal();
+    toast({
+      title: "Database Error: Appointment Creation Failed",
+      description:
+        "A syntax error occurred while attempting to add the appointment. Please contact support or check the server logs for more details.",
+      variant: "destructive",
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-      if (!patientId || !doctorName || !location || !appointmentTime) {
-        // @ts-expect-error: `form.reset` might not be recognized by TypeScript
-        alert("Please fill all fields");
-        return;
-      }
+    if (!patientId || !doctorName || !location || !appointmentTime) {
+      // @ts-expect-error: `form.reset` might not be recognized by TypeScript
+      alert("Please fill all fields");
+      return;
+    }
 
     const selectedPatient = patients.find(
       (patient) => patient.id === parseInt(patientId)
@@ -124,12 +133,19 @@ console.log(setPatients)
         location,
       });
     }
+
+    toast({
+      title: "Database Error: Appointment Creation Failed",
+      description:
+        "A syntax error occurred while attempting to add the appointment. Please contact support or check the server logs for more details.",
+      variant: "destructive",
+    });
   };
 
   useEffect(() => {
     console.log("Appointments:", appointments);
   }, [appointments]);
-console.log(patientName, setPatientName)
+  console.log(patientName, setPatientName);
   return (
     <div className="p-4">
       {/* Book Appointment Button */}

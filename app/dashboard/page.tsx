@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Tabs,
   TabsContent,
@@ -11,9 +11,29 @@ import QueueManagement from "../../components/QueueManagement";
 import AppointmentManagement from "../../components/AppointmentManagement";
 import DoctorManagement from "../../components/DoctorManagement";
 import PatientRegistration from "../../components/PatientManagement";
+import { useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
 
 const Dashboard = () => {
-  return (
+  const router = useRouter();
+  const [loading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") !==
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    ) {
+      router.push("/login");
+    } else {
+      setIsLoading(false);
+    }
+  }, [router]);
+
+  return loading ? (
+    <div className="h-screen w-full flex items-center justify-center">
+      <Loader className="animate-spin" />
+    </div>
+  ) : (
     <div className="p-6">
       <Tabs defaultValue="queue-management">
         <TabsList>

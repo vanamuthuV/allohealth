@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../components/ui/dialog";
+import { useToast } from "../hooks/use-toast";
 
 const DoctorManagement = () => {
   const [doctors, setDoctors] = useState([
@@ -30,17 +31,31 @@ const DoctorManagement = () => {
     },
   ]);
 
+  const { toast } = useToast();
+
   const [isOpen, setIsOpen] = useState(false);
   const [doctorToEdit, setDoctorToEdit] = useState(null);
 
   const addDoctor = (newDoctor) => {
     setDoctors((prev) => [...prev, { id: prev.length + 1, ...newDoctor }]);
+    toast({
+      title: "Database Error: Failed to Update Doctor",
+      description:
+        "An error occurred while attempting to update doctor details. Please check the input data or review the server logs for further information.",
+      variant: "destructive",
+    });
   };
 
   const updateDoctor = (id, updatedDoctor) => {
     setDoctors((prev) =>
       prev.map((doc) => (doc.id === id ? { ...doc, ...updatedDoctor } : doc))
     );
+    toast({
+      title: "Database Error: Failed to Update Doctor",
+      description:
+        "An error occurred while attempting to update doctor details. Please check the input data or review the server logs for further information.",
+      variant: "destructive",
+    });
   };
 
   const openModal = (doctor) => {
@@ -75,11 +90,17 @@ const DoctorManagement = () => {
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() =>
+                    onClick={() => {
                       setDoctors((prev) =>
                         prev.filter((doc) => doc.id !== doctor.id)
-                      )
-                    }
+                      );
+                      toast({
+                        title: "Database Error: Failed to Update Doctor",
+                        description:
+                          "An error occurred while attempting to update doctor details. Please check the input data or review the server logs for further information.",
+                        variant: "destructive",
+                      });
+                    }}
                   >
                     Delete
                   </Button>
@@ -116,6 +137,13 @@ const DoctorManagement = () => {
                   availability: newAvailability,
                   location: newLocation,
                 });
+                toast({
+                  title: "Database Error: Failed to Update Doctor",
+                  description:
+                    "An error occurred while attempting to update doctor details. Please check the input data or review the server logs for further information.",
+                  variant: "destructive",
+                });
+
                 form.reset();
               }
             }}
@@ -179,6 +207,13 @@ const DoctorManagement = () => {
                     availability: updatedAvailability,
                     location: updatedLocation,
                   });
+                  toast({
+                    title: "Database Error: Failed to Update Doctor",
+                    description:
+                      "An error occurred while attempting to update doctor details. Please check the input data or review the server logs for further information.",
+                    variant: "destructive",
+                  });
+
                   closeModal();
                 }
               }}

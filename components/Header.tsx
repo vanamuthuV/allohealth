@@ -1,7 +1,6 @@
-// components/Header.tsx
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "../components/ui/button";
 import {
   DropdownMenu,
@@ -10,18 +9,18 @@ import {
   DropdownMenuItem,
 } from "../components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "../components/ui/avatar"; // Import AvatarImage and AvatarFallback
+import { useRouter } from "next/navigation"; // Correct import for Next.js 13+
 
 const Header = () => {
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-
-
-  console.log(isProfileMenuOpen)
+  const router = useRouter();
 
   const handleLogout = () => {
-    // Add your logout functionality here
-    //@ts-expect-error  'yo'
-    alert("Logging out...");
-    setIsProfileMenuOpen(false);
+    try {
+      localStorage.clear(); // Clear the local storage
+      router.push("/login"); // Redirect to the login page
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
   };
 
   return (
@@ -31,13 +30,17 @@ const Header = () => {
       <div className="relative">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="p-1 rounded-full">
+            <Button
+              variant="ghost"
+              className="p-1 rounded-full"
+              aria-label="Profile Menu"
+            >
               <Avatar className="w-10 h-10">
                 <AvatarImage
-                  src="https://via.placeholder.com/40" // Replace with actual profile image URL
+                  src="https://via.placeholder.com/40" // Replace with the actual profile image URL
                   alt="Profile"
                 />
-                <AvatarFallback>AB</AvatarFallback> {/* Fallback initials */}
+                <AvatarFallback>A0</AvatarFallback> {/* Fallback initials */}
               </Avatar>
             </Button>
           </DropdownMenuTrigger>

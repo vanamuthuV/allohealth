@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useToast } from "../../hooks/use-toast";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +14,9 @@ const LoginPage = () => {
     password: "",
     masterPassword: "",
   });
+
+  const { toast } = useToast();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,13 +26,36 @@ const LoginPage = () => {
     }));
   };
 
-  const router = useRouter();
-
-  const handleLogin = (e) => {
+  const handleLogin = (e: unknown) => {
+    //@ts-expect-error tihis
     e.preventDefault();
-    // Implement login logic here
-    console.log(formData);
-    router.push("/dashboard");
+
+    const validCredentials = {
+      username: "allo001",
+      password: "12345678",
+      masterPassword: "allo4life",
+    };
+
+    if (
+      formData.username === validCredentials.username &&
+      formData.password === validCredentials.password &&
+      formData.masterPassword === validCredentials.masterPassword
+    ) {
+      // Successful login
+      router.push("/dashboard");
+      localStorage.setItem(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+      );
+    } else {
+      // Trigger toast notification
+      toast({
+        title: "Invalid credentials",
+        description:
+          "Please check your username, password, and master password.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -75,9 +101,29 @@ const LoginPage = () => {
                 onChange={handleChange}
                 required
               />
-              <p className="text-sm text-gray-500 mt-1">
-                Note: For testing purposes, use &quot; trythis &quot; as the
-                master password.
+              <p className="text-sm text-gray-700 mt-4 p-4 border border-purple-300 rounded-lg bg-purple-50">
+                <strong>Test Credentials:</strong>
+                <ul className="mt-2 space-y-1">
+                  <li>
+                    <strong>Username:</strong> allo001
+                  </li>
+                  <li>
+                    <strong>Password:</strong> 12345678
+                  </li>
+                  <li>
+                    <strong>Master Password:</strong> allo4life
+                  </li>
+                </ul>
+                <span className="block mt-3 text-purple-700">
+                  Need a new account? Contact the DB admin at{" "}
+                  <a
+                    href="mailto:vanamuthuvjob@gmail.com"
+                    className="text-purple-800 font-medium underline"
+                  >
+                    vanamuthuvjob@gmail.com
+                  </a>
+                  .
+                </span>
               </p>
             </div>
             <Button type="submit" className="w-full">

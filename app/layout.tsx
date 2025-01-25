@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
 import "./globals.css";
 import Header from "../components/Header";
 import { usePathname } from "next/navigation";
-
+import ToastContainer from "../components/toast-container";
 
 export default function RootLayout({
   children,
@@ -19,6 +19,7 @@ export default function RootLayout({
         {pathname === "/dashboard" && <Header />}
         {children}
       </body>
+      <ToastContainer />
     </html>
   );
 }

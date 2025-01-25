@@ -1,17 +1,14 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
-import { User } from "./entity/User"
+import "reflect-metadata";
+import { DataSource } from "typeorm";
 
-export const AppDataSource = new DataSource({
-    type: "mysql",
-    host: "localhost",
-    port: 3306,
-    username: "test",
-    password: "test",
-    database: "test",
-    synchronize: true,
-    logging: false,
-    entities: [User],
-    migrations: [],
-    subscribers: [],
-})
+const AppDataSource = new DataSource({
+  type: "mysql",
+  url: process.env.DATABASE_URL, // Use environment variables for production
+  synchronize: false, // NEVER use true in production
+  logging: true,
+  entities: ["src/entity/**/*.ts"], // Path to your entities
+  migrations: ["src/migration/**/*.ts"], // Path to migrations
+  subscribers: ["src/subscriber/**/*.ts"], // Path to subscribers (optional)
+});
+
+export default AppDataSource;

@@ -12,13 +12,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
+import { useToast } from "../hooks/use-toast";
 
 const PatientRegistration = () => {
   const [patients, setPatients] = useState([]);
 
   const addPatient = (newPatient) => {
     setPatients((prev) => [...prev, { id: prev.length + 1, ...newPatient }]);
+    toast({
+      title: "Database Error: Failed to Register Patient",
+      description:
+        "An error occurred while attempting to register the patient. Please verify the provided information or review the server logs for further details.",
+      variant: "destructive",
+    });
   };
+
+  const { toast } = useToast();
 
   return (
     <Card>

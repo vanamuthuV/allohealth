@@ -11,8 +11,10 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { Trash, Star } from "lucide-react";
+import { useToast } from "../hooks/use-toast";
 
 const QueueManagement = () => {
+  const { toast } = useToast();
   const [queue, setQueue] = useState([
     {
       id: 1,
@@ -34,6 +36,12 @@ const QueueManagement = () => {
     setQueue((prev) =>
       prev.map((item) => (item.id === id ? { ...item, status } : item))
     );
+    toast({
+      title: "Database Error: Failed to Update Queue",
+      description:
+        "A syntax error occurred while attempting to update the queue. Please verify the query or check server logs for more details.",
+      variant: "destructive",
+    });
   };
 
   const makePriority = (id) => {
@@ -48,10 +56,22 @@ const QueueManagement = () => {
         ...updatedQueue.filter((item) => !item.isPriority),
       ];
     });
+    toast({
+      title: "Database Error: Failed to Update Queue",
+      description:
+        "A syntax error occurred while attempting to update the queue. Please verify the query or check server logs for more details.",
+      variant: "destructive",
+    });
   };
 
   const deleteQueueEntry = (id) => {
     setQueue((prev) => prev.filter((item) => item.id !== id));
+    toast({
+      title: "Database Error: Failed to Update Queue",
+      description:
+        "A syntax error occurred while attempting to update the queue. Please verify the query or check server logs for more details.",
+      variant: "destructive",
+    });
   };
 
   return (
@@ -80,7 +100,15 @@ const QueueManagement = () => {
               <div className="flex items-center space-x-4">
                 <Select
                   value={item.status}
-                  onValueChange={(value) => updateQueueStatus(item.id, value)}
+                  onValueChange={(value) => {
+                    updateQueueStatus(item.id, value);
+                    toast({
+                      title: "Database Error: Failed to Update Queue",
+                      description:
+                        "A syntax error occurred while attempting to update the queue. Please verify the query or check server logs for more details.",
+                      variant: "destructive",
+                    });
+                  }}
                 >
                   <SelectTrigger className="w-40 border-gray-300">
                     <SelectValue placeholder={item.status} />
@@ -106,7 +134,15 @@ const QueueManagement = () => {
 
                 {/* Delete Button with icon and custom color */}
                 <Button
-                  onClick={() => deleteQueueEntry(item.id)}
+                  onClick={() => {
+                    deleteQueueEntry(item.id);
+                    toast({
+                      title: "Database Error: Failed to Update Queue",
+                      description:
+                        "A syntax error occurred while attempting to update the queue. Please verify the query or check server logs for more details.",
+                      variant: "destructive",
+                    });
+                  }}
                   variant="outline"
                   className="flex items-center bg-red-600 text-white hover:bg-red-500"
                 >

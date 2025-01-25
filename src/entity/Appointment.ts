@@ -1,7 +1,5 @@
 // src/entity/Appointment.ts
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Doctor } from "./Doctor";
-import { Patient } from "./Patient";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class Appointment {
@@ -9,14 +7,20 @@ export class Appointment {
   id: number;
 
   @Column()
-  date: Date;
+  doctorName: string; // Doctor's Name (instead of doctorId)
+
+  @Column()
+  patientName: string; // Patient's Name (instead of patientId)
+
+  @Column()
+  date: string; // Date of the appointment
+
+  @Column()
+  time: string; // Time of the appointment (e.g., "9:00 AM")
+
+  @Column()
+  location: string; // Location of the appointment
 
   @Column({ default: "booked" })
-  status: "booked" | "completed" | "canceled";
-
-  @ManyToOne(() => Doctor, (doctor) => doctor.appointments)
-  doctor: Doctor;
-
-  @ManyToOne(() => Patient, (patient) => patient.appointments)
-  patient: Patient;
+  status: "booked" | "completed" | "canceled"; // Status of the appointment
 }

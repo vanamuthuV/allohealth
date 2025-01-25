@@ -1,7 +1,5 @@
 // src/entity/Patient.ts
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Appointment } from "./Appointment";
-import { Queue } from "./Queue";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class Patient {
@@ -9,20 +7,14 @@ export class Patient {
   id: number;
 
   @Column()
-  name: string;
+  name: string; // Patient's Name
 
   @Column({ unique: true })
-  contact: string;
+  contact: string; // Patient's contact information
 
   @Column()
-  age: number;
+  age: number; // Patient's age
 
   @Column()
-  gender: string;
-
-  @OneToMany(() => Appointment, (appointment) => appointment.patient)
-  appointments: Appointment[];
-
-  @OneToMany(() => Queue, (queue) => queue.patient)
-  queueEntries: Queue[];
+  gender: string; // Patient's gender
 }
