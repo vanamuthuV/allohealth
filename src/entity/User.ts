@@ -14,4 +14,7 @@ export class User {
 
   @Column({ default: true })
   isActive: boolean; // To enable or disable accounts
+    firstName: string;
+    lastName: string;
+    age: number;
 }
