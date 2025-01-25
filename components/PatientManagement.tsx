@@ -30,13 +30,13 @@ const PatientRegistration = () => {
           onSubmit={(e) => {
             e.preventDefault();
             const form = e.target;
-            //@ts-ignore
+            // @ts-expect-error: `form.reset` might not be recognized by TypeScript
             const newName = form.name.value;
-            //@ts-ignore
+            // @ts-expect-error: `form.reset` might not be recognized by TypeScript
             const newContact = form.contact.value;
-            //@ts-ignore
+            // @ts-expect-error: `form.reset` might not be recognized by TypeScript
             const newAge = Number.parseInt(form.age.value);
-            //@ts-ignore
+            // @ts-expect-error: `form.reset` might not be recognized by TypeScript
             const newGender = form.gender.value;
 
             if (newName && newContact && newAge && newGender) {
@@ -46,7 +46,7 @@ const PatientRegistration = () => {
                 age: newAge,
                 gender: newGender,
               });
-              //@ts-ignore
+              // @ts-expect-error: `form.reset` might not be part of the form interface
               form.reset();
             }
           }}

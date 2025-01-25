@@ -52,11 +52,13 @@ const AppointmentManagement = () => {
     },
   ]);
 
+  console.log(setDoctors)
+
   const [patients, setPatients] = useState([
     { id: 1, name: "John Doe" },
     { id: 2, name: "Jane Doe" },
   ]);
-
+console.log(setPatients)
   const [isOpen, setIsOpen] = useState(false);
   const [doctorName, setDoctorName] = useState("");
   const [patientName, setPatientName] = useState("");
@@ -104,10 +106,10 @@ const AppointmentManagement = () => {
     e.preventDefault();
 
       if (!patientId || !doctorName || !location || !appointmentTime) {
-        //@ts-ignore
-      alert("Please fill all fields");
-      return;
-    }
+        // @ts-expect-error: `form.reset` might not be recognized by TypeScript
+        alert("Please fill all fields");
+        return;
+      }
 
     const selectedPatient = patients.find(
       (patient) => patient.id === parseInt(patientId)
@@ -127,7 +129,7 @@ const AppointmentManagement = () => {
   useEffect(() => {
     console.log("Appointments:", appointments);
   }, [appointments]);
-
+console.log(patientName, setPatientName)
   return (
     <div className="p-4">
       {/* Book Appointment Button */}
@@ -149,7 +151,8 @@ const AppointmentManagement = () => {
               id="patientId"
               name="patientId"
               value={patientId}
-              onChange={(e : any) => setPatientId(e.target.value)}
+              // @ts-expect-error: `form.reset` might not be part of the form interface
+              onChange={(e: unknown) => setPatientId(e.target.value)}
               required
               className="w-full p-2 border rounded-md"
             >
@@ -161,7 +164,7 @@ const AppointmentManagement = () => {
               ))}
             </select>
 
-            <Label htmlFor="doctorName">Doctor's Name</Label>
+            <Label htmlFor="doctorName">Doctor&apos;s Name</Label>
             <Input
               id="doctorName"
               name="doctorName"
@@ -174,7 +177,8 @@ const AppointmentManagement = () => {
               id="location"
               name="location"
               value={location}
-              onChange={(e : any) => setLocation(e.target.value)}
+              // @ts-expect-error: `form.reset` might not be part of the form interface
+              onChange={(e: unknown) => setLocation(e.target.value)}
               required
               className="w-full p-2 border rounded-md"
             >
@@ -191,7 +195,8 @@ const AppointmentManagement = () => {
               id="appointmentTime"
               name="appointmentTime"
               value={appointmentTime}
-              onChange={(e : any) => setAppointmentTime(e.target.value)}
+              // @ts-expect-error: `form.reset` might not be part of the form interface
+              onChange={(e: unknown) => setAppointmentTime(e.target.value)}
               required
               className="w-full p-2 border rounded-md"
             >

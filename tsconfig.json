@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "es5",
-      "es6"
-    ],
+    "lib": ["es5", "es6"],
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -27,13 +24,6 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"]
 }

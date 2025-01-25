@@ -10,7 +10,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "../components/ui/dialog";
 
 const DoctorManagement = () => {
@@ -93,8 +92,10 @@ const DoctorManagement = () => {
         <div className="mt-6">
           <h3 className="text-md font-bold">Add New Doctor</h3>
           <form
-            onSubmit={(e : any) => {
+            onSubmit={(e: unknown) => {
+              // @ts-expect-error: `form.reset` might not be part of the form interface
               e.preventDefault();
+              // @ts-expect-error: `form.reset` might not be part of the form interface
               const form = e.target;
               const newName = form.name.value;
               const newSpecialization = form.specialization.value;
@@ -153,8 +154,10 @@ const DoctorManagement = () => {
               <DialogTitle>Edit Doctor</DialogTitle>
             </DialogHeader>
             <form
-              onSubmit={(e : any) => {
+              onSubmit={(e: unknown) => {
+                // @ts-expect-error: `form.reset` might not be part of the form interface
                 e.preventDefault();
+                // @ts-expect-error: `form.reset` might not be part of the form interface
                 const form = e.target;
 
                 const updatedName = form.name.value;
